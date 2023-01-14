@@ -1,0 +1,164 @@
+8.
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Register</title>
+		<link rel="manifest" href="manifest.json" />
+		<link rel="stylesheet" href="index.css" />
+		<link rel="icon" type="image/x-icon" href="assets/logo.ico" />
+	</head>
+	<body>
+		<center>
+			<h2>Register to the the Music Academy</h2>
+			<table>
+				<form id="form">
+					<tr>
+						<th>Name:</th>
+						<td>
+							<input id="name" type="text" required />
+						</td>
+					</tr>
+					<tr>
+						<td colspan=2 align="center">
+							<input type="submit" id="submit" value="REGISTER" />
+						</td>
+					</tr>
+				</form>
+			</table>
+		</center>
+		<script>
+			if('serviceWorker' in navigator) {
+				navigator.serviceWorker.register("sw.js")
+				.then((e) => {
+					if(e.active === null){
+						console.log("registered");
+					}
+				});
+			} else {
+				console.log("browser does not support service worker");
+			}
+
+			const register = (e) => {
+				e.preventDefault();
+
+				alert("Registered!");
+			}
+
+			document.getElementById("form").addEventListener("submit", register);
+		</script>
+	</body>
+</html>
+
+
+
+{
+	"name": "Music Academy",
+	"short_name": "Registration",
+	"display": "standalone",
+	"start_url": "/",
+	"id": "/",
+	"Orientation": "portrait_primary",
+	"description": "Register to the Music Academy",
+	"icons": [
+		{
+			"src": "assets/logo.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		}
+	],
+	"background_color": "#00AA00",
+	"theme_color": "#00CC00"
+}
+
+
+
+self.addEventListener("install", (e) => {
+    console.log("installed");
+})
+
+self.addEventListener("activate", (e) => {
+    console.log("activated");
+})
+
+self.addEventListener("fetch", (e) => {
+    console.log("fetched");
+})
+
+
+
+9.
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Register</title>
+		<link rel="manifest" href="manifest.json" />
+		<link rel="stylesheet" href="index.css" />
+		<link rel="icon" type="image/x-icon" href="assets/hp_logo.ico" />
+	</head>
+	<body>
+		<center>
+			<h2>Fetch From Github API</h2>
+			<div id="data" style="padding: 2em;"></div>
+		</center>
+		<script>
+			if('serviceWorker' in navigator) {
+				navigator.serviceWorker.register("sw.js")
+				.then((e) => {
+					if(e.active === null){
+						console.log("registered");
+					}
+				});
+			} else {
+				console.log("browser does not support service worker");
+			}
+		</script>
+	</body>
+</html>
+
+
+
+{
+	"name": "Fetch Github Details",
+	"short_name": "API Fetch",
+	"display": "standalone",
+	"start_url": "/",
+	"id": "/",
+	"Orientation": "portrait_primary",
+	"description": "Get user details from Github using it's API",
+	"icons": [
+		{
+			"src": "assets/hp_logo.png",
+			"type": "image/png",
+			"sizes": "256x256"
+		}
+	],
+	"background_color": "#AA0000",
+	"theme_color": "#CC0000"
+}
+
+
+
+self.addEventListener("install", (e) => {
+    console.log("installed");
+})
+
+self.addEventListener("activate", (e) => {
+    console.log("activated");
+})
+
+self.addEventListener("fetch", (e) => {
+    console.log("fetched");
+
+    fetch("https://api.github.com/users/srjnm")
+    .then((e) => {
+        return e.json();
+    })
+    .then((json) => {
+        console.log(json);
+    })
+    .catch((e) => {
+        console.log(e);
+    });
+})
